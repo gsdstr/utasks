@@ -9,7 +9,9 @@ Page {
     title: i18n.tr("Lists")
     anchors.fill: parent
 
+    property variant curItem;
     property variant itemsList;
+    signal itemClicked();
 
     onItemsListChanged:
     {
@@ -21,7 +23,6 @@ Page {
         {
             console.log("append:", itemsList[i]["title"], itemsList[i]["id"]);
             var item = itemsList[i]
-            item["progression"] = true // Add arrow
             taskListsModel.append( item );
         }
     }
@@ -30,15 +31,6 @@ Page {
         id: taskListsModel
         ListElement {
             title: "My"
-            rate: 1.0
-        }
-
-        function getCurrency(idx) {
-            return (idx >= 0 && idx < count) ? get(idx).currency: ""
-        }
-
-        function getRate(idx) {
-            return (idx >= 0 && idx < count) ? get(idx).rate: 0.0
         }
     }
 
@@ -47,15 +39,18 @@ Page {
         anchors.fill: parent
 
         ListView {
+            id: taskListsView
             model: taskListsModel
             anchors.fill: parent
 
             delegate: Standard {
                 text: title
+                progression: true
                 onClicked: {
-                    /*caller.currencyIndex = index
-                    caller.input.update()
-                    hide()*/
+                    console.log("index: ", index);
+                    taskListsView.currentIndex = index
+                    curItem = taskListsModel.get(index)
+                    itemClicked()
                 }
             }
         }

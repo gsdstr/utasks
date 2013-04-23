@@ -19,6 +19,18 @@ MainView {
             id: taskLists
             visible: false
 
+            onItemClicked: {
+                var item = taskLists.curItem
+                console.log("onItemClicked: ", item)
+                tasks.title = item["title"]
+                TasksDataManager.getMyTasks(item["id"])
+                pageStack.push(tasks)
+            }
+        }
+
+        Tasks {
+            id: tasks
+            visible: false
         }
 
         GoogleOAuth {

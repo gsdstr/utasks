@@ -112,7 +112,7 @@ function getMyTasks(taskListID)
     handleRequest({
         "method": "GET",
         "url": "https://www.googleapis.com/tasks/v1/lists/"+ taskListID +"/tasks?&access_token=" + google_oauth.accessToken,
-        "onload": function(result) { tasksListPage.itemsList = result["items"]; tasksListPage.showProgressBar = false; }
+        "onload": function(result) { tasks.itemsList = result["items"]; }
     });
 }
 
