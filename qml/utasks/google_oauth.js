@@ -45,18 +45,17 @@ function requestPermanentToken(code)
     var req = new XMLHttpRequest();
     req.onreadystatechange = function() {
         console.log("req.readyState", req.readyState);
-        if(req.readyState == 4)
-        {
+        if(req.readyState == 4){
             //console.log("Status, headers", req.status, req.getAllResponseHeaders());
         }
-        if (req.readyState == 4 && req.status == 200)
-        {
+        if (req.readyState == 4 && req.status == 200){
             //console.log("response headers:\n", req.getAllResponseHeaders());
             //console.log("req.readyState == 4", req.readyState, req.status);
             console.log("responseText", req.responseText);
             var result = eval('(' + req.responseText + ')');
             google_oauth.accessToken = result["access_token"];
-            settingsManager.refreshToken = result["refresh_token"];
+            tasks.refreshToken = result["refresh_token"];
+            onLoginDone()
         }
     }
     req.open("POST", "https://accounts.google.com/o/oauth2/token", true);
