@@ -24,8 +24,14 @@ MainView {
             onLoginDone: {
                 pageStack.push(tasks)
                 console.log("Login Done")
-                tasks.accessToken = google_oauth.accessToken
-                TasksDataManager.getMyTaskLists()
+                tasks.refreshToken = refreshToken
+
+                console.log("refreshToken = ", refreshToken)
+
+                settings.setValueFor("accessToken", accessToken)
+                settings.setValueFor("refreshToken", refreshToken)
+
+                //TasksDataManager.getMyTaskLists()
             }
         }
 
@@ -33,12 +39,14 @@ MainView {
 
     Component.onCompleted: {
         console.log("onCompleted")
-        if (tasks.refreshToken === "") {
+        //if (tasks.refreshToken === "") {
+        if (settings.getValueFor("refreshToken") === "") {
             pageStack.push(google_oauth)
             console.log("google_oauth")
             google_oauth.login()
         } else {
-            google_oauth.refreshAccessToken(settingsManager.refreshToken)
+            pageStack.push(tasks)
+            google_oauth.refreshAccessToken(settings.getValueFor("refreshToken"))
         }
     }
 

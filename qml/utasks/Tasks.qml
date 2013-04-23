@@ -6,11 +6,10 @@ import Ubuntu.Components.Popups 0.1
 
 Page {
     id: tasks
-    title: i18n.tr("UTasks")
+    title: i18n.tr("Tasks")
 
     property real margins: units.gu(2)
     property real buttonWidth: units.gu(9)
-    property string accessToken: ""
     property string refreshToken: ""
     active: true
 

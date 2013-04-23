@@ -18,6 +18,7 @@ Page {
 
     property bool authorized: accessToken != ""
     property string accessToken: ""
+    property string refreshToken: ""
     signal loginDone();
 
     onAccessTokenChanged: {
@@ -51,11 +52,6 @@ Page {
 
             onUrlChanged: OAuth.urlChanged(url)
         }
-    }
-
-    Component.onCompleted: {
-        console.log("onCompleted")
-        login()
     }
 
 }

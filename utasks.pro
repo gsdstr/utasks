@@ -12,7 +12,8 @@ QML_IMPORT_PATH =
 # MOBILITY +=
 
 # The .cpp file which was generated for your project. Feel free to hack it.
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    taskssettings.cpp
 
 # Installation path
 # target.path =
@@ -23,3 +24,6 @@ qtcAddDeployment()
 
 OTHER_FILES += \
     qml/utasks/GoogleOAuth.qml
+
+HEADERS += \
+    taskssettings.h

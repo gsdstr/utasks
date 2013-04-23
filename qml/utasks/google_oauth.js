@@ -29,12 +29,10 @@ function urlChanged(url) {
     console.log("Found access_token = ", access_token);
     console.log("Found code = ", code);
 
-    if(access_token != "")
-    {
+    if(access_token != ""){
         google_oauth.accessToken = access_token;
     }
-    if(code != "")
-    {
+    if(code != ""){
         requestPermanentToken(code);
     }
 
@@ -53,9 +51,8 @@ function requestPermanentToken(code)
             //console.log("req.readyState == 4", req.readyState, req.status);
             console.log("responseText", req.responseText);
             var result = eval('(' + req.responseText + ')');
-            google_oauth.accessToken = result["access_token"];
-            tasks.refreshToken = result["refresh_token"];
-            onLoginDone()
+            google_oauth.refreshToken = result["refresh_token"];
+            google_oauth.accessToken = result["access_token"];            
         }
     }
     req.open("POST", "https://accounts.google.com/o/oauth2/token", true);
