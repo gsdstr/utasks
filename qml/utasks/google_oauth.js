@@ -1,5 +1,5 @@
 var client_id = "798148107527.apps.googleusercontent.com";
-var client_secret = "qFgvFoLZEQpo_cgOo9umIYCE";
+var client_secret = "T74z5UbDT6uaPXACrY5x8CER";
 var redirect_uri = "http://localhost";
 
 

@@ -15,6 +15,7 @@ MainView {
         id: pageStack
         Component.onCompleted: push(taskLists)
 
+        //Спсиски задач пользователя
         TaskLists {
             id: taskLists
             visible: false
@@ -28,11 +29,13 @@ MainView {
             }
         }
 
+        //Задачи в одном списке
         Tasks {
             id: tasks
             visible: false
         }
 
+        //Авторизация и получение токена
         GoogleOAuth {
             id: google_oauth
             visible: false
@@ -49,9 +52,9 @@ MainView {
                 TasksDataManager.getMyTaskLists()
             }
         }
-
     }
 
+    //По окончанию запуска компонента проверяем наличие токена
     Component.onCompleted: {
         console.log("onCompleted")
         if (settings.getValueFor("refreshToken") === "") {

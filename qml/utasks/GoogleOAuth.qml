@@ -29,22 +29,22 @@ Page {
         }
     }
 
-
-    function login()
-    {
+    function login(){
         loginView.url = oauth_link
     }
 
-    function refreshAccessToken(refresh_token)
-    {
+    function refreshAccessToken(refresh_token){
         OAuth.refreshAccessToken(refresh_token)
     }
 
     Flickable {
         id: web_view_window
 
-        property bool loading:  false;
+        property bool loading:  false
         anchors.fill: parent
+        //Для тестирования
+        /*width:  800
+        height: 800*/
 
         WebView {
             id: loginView
@@ -54,4 +54,9 @@ Page {
         }
     }
 
+    //Для тестирования
+    /*Component.onCompleted: {
+        console.log("onCompleted")
+        login()
+    }*/
 }
