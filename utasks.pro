@@ -13,7 +13,8 @@ QML_IMPORT_PATH =
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
-    taskssettings.cpp
+    taskssettings.cpp \
+    tasks_data_manager.cpp
 
 # Installation path
 # target.path =
@@ -26,4 +27,5 @@ OTHER_FILES += \
     qml/utasks/GoogleOAuth.qml
 
 HEADERS += \
-    taskssettings.h
+    taskssettings.h \
+    tasks_data_manager.h

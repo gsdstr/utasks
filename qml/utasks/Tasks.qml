@@ -36,16 +36,27 @@ Page {
         id: flickable
         anchors.fill: parent
 
-        ListView {
-            model: tasksModel
-            anchors.fill: parent
+        Column {
+            Empty {
+                TextArea {
+                    text: i18n.tr("text")
+                    anchors {
+                        margins: units.gu(1)
+                        fill: parent
+                    }
+                }
+            }
+            ListView {
+                model: tasksModel
+                anchors.fill: parent
 
-            delegate: Standard {
-                text: title
-                onClicked: {
-                    /*caller.currencyIndex = index
+                delegate: Standard {
+                    text: title
+                    onClicked: {
+                        /*caller.currencyIndex = index
                     caller.input.update()
                     hide()*/
+                    }
                 }
             }
         }

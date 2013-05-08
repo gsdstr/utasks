@@ -15,7 +15,7 @@ MainView {
         id: pageStack
         Component.onCompleted: push(taskLists)
 
-        //Спсиски задач пользователя
+        //Списки задач пользователя
         TaskLists {
             id: taskLists
             visible: false
