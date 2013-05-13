@@ -15,8 +15,7 @@ Page {
     property variant itemsList;
     signal itemClicked();
 
-    onItemsListChanged:
-    {
+    onItemsListChanged: {
         taskListsModel.clear()
         if(itemsList === undefined)
             return
@@ -51,7 +50,7 @@ Page {
 
             TextField {
                 id: newField
-                placeholderText: i18n.tr("New task")
+                placeholderText: i18n.tr("New list")
                 width: parent.width - addButton.width - units.gu(1)
             }
 
@@ -59,9 +58,20 @@ Page {
                 id: addButton
                 text: i18n.tr("Add")
                 onClicked: {
-                    TasksDataManager.createList(newField.text)
-                    newField.text = ''
-                    TasksDataManager.getMyTaskLists()
+                    if (text === i18n.tr("Add")){
+                        TasksDataManager.createList(newField.text)
+                        newField.text = ''
+                        TasksDataManager.getMyTaskLists()
+                    } else { //edit
+                        curItem.title = newField.text
+                        console.log("onPressAndHold: ", curItem["title"], curItem["id"])
+                        TasksDataManager.updateTaskList(curItem["id"], curItem)
+                        //TasksDataManager.getMyTaskLists()
+
+                        addButton.text = i18n.tr("Add")
+                        newField.text = ''
+                        curItem.selected = false
+                    }
                 }
             }
         }
@@ -70,7 +80,6 @@ Page {
             id: taskListsView
             model: taskListsModel
             anchors.top: newItem.bottom
-            //anchors.topMargin: newItem.height
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.bottom: parent.bottom
@@ -88,11 +97,14 @@ Page {
                 onItemRemoved: {
                     var item = taskListsModel.get(index)
                     TasksDataManager.deleteList(item["id"])
-                    TasksDataManager.getMyTaskLists()
+                    //TasksDataManager.getMyTaskLists()
                 }
                 onPressAndHold: {
                     var item = taskListsModel.get(index)
-                    console.log("onPressAndHold: ", item["id"]);
+                    selected  = true
+                    addButton.text = i18n.tr("Edit")
+                    newField.text = title
+                    curItem = taskListsModel.get(index)
                 }
             }
         }

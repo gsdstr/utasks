@@ -25,7 +25,8 @@ MainView {
                 console.log("onItemClicked: ", item)
                 tasks.title = item["title"]
                 TasksDataManager.getMyTasks(item["id"])
-                pageStack.push(tasks)
+                tasks.listId = item["id"]
+                pageStack.push(tasks)                 
             }
         }
 
